@@ -84,13 +84,13 @@ The Admin Dashboard Website provides a comprehensive interface for managing and 
 
 2. **Install frontend dependencies:**
     ```sh
-    cd frontend
+    cd client
     npm install
     ```
 
 3. **Install backend dependencies:**
     ```sh
-    cd ../backend
+    cd ../server
     npm install
     ```
 
@@ -98,19 +98,26 @@ The Admin Dashboard Website provides a comprehensive interface for managing and 
     - Create a `.env` file in the `backend` directory and add the following:
         ```
         MONGODB_URI=your_mongodb_uri
-        JWT_SECRET=your_jwt_secret
-        SESSION_SECRET=your_session_secret
+        MONGO_URL= mongodb://sudotester:b5f5BIj3lViR6xZ9@ac-ejlq9qy-shard-00-00.u774ulz.mongodb.net:27017,ac-ejlq9qy-shard-00-01.u774ulz.mongodb.net:27017,ac-ejlq9qy-shard-00-02.u774ulz.mongodb.net:27017/TESTDB?ssl=true&replicaSet=atlas-h187n4-shard-0&authSource=admin&retryWrites=true&w=majority&appName=ClusterTestDb
+
+PORT = 5000
+
+JWT_SECRECT_KEY=KESHABADMIN
+
+SECRET = KESHABADMIN
+
+MONGO_SESS_COL= testKeshabAppSess
         ```
 
 5. **Run the application:**
     - **Frontend:**
         ```sh
-        cd frontend
+        cd client
         npm run dev
         ```
     - **Backend:**
         ```sh
-        cd ../backend
+        cd ../server
         npm start
         ```
 
@@ -137,4 +144,4 @@ We welcome contributions from the community. To contribute, please follow these 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under Mr. Keshab Das. See the [LICENSE](LICENSE) file for details.
