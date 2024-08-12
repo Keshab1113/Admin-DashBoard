@@ -5,7 +5,7 @@ const userSlice = createSlice({
     initialState: {
         isAuthenticated: false,
         user: null,
-        logoUrl:'https://rms.imatrixautomation.com/logo/default.png',
+        logoUrl: 'https://rms.imatrixautomation.com/logo/default.png',
     },
     reducers: {
         login: (state, action) => {
@@ -16,11 +16,13 @@ const userSlice = createSlice({
             state.isAuthenticated = false;
             state.user = null;
         },
+        register: (state, action) => {
+            state.isAuthenticated = true;
+            state.user = action.payload;
+        },
     },
 });
 
-
-
-export const { login, logout } = userSlice.actions;
+export const { login, logout, register } = userSlice.actions;
 export const selectUser = (state) => state.user;
 export default userSlice.reducer;

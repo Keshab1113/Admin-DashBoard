@@ -15,7 +15,7 @@ const Historical = () => {
         // Simulate loading for 5 seconds
         const timeout = setTimeout(() => {
             setLoading(false);
-        }, 4000);
+        }, 150);
 
         return () => clearTimeout(timeout);
     }, []);

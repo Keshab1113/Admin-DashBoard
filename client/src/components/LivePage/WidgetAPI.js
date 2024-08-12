@@ -29,6 +29,6 @@ const widgetType = [
     { id: 'Map', label: 'Map', Icon: LocationOnIcon, iconClass: 'text-blue-500' },
     { id: 'Metric', label: 'Metric', Icon: AodIcon, iconClass: 'text-blue-500' },
     { id: 'Pie', label: 'Pie', Icon: PieChartIcon, iconClass: 'text-blue-500' },
-    { id: 'Chart', label: 'Chart', Icon: BarChartIcon, iconClass: 'text-blue-500' }
+    { id: 'Bar', label: 'Bar', Icon: BarChartIcon, iconClass: 'text-blue-500' }
 ];
 export default widgetType

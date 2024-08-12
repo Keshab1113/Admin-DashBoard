@@ -8,12 +8,12 @@ const ProfileBox2 = () => {
         // Simulate loading for 5 seconds
         const timeout = setTimeout(() => {
             setLoading(false);
-        }, 4000);
+        }, 100);
 
         return () => clearTimeout(timeout);
     }, []);
   return (
-      <div className='sm:w-[40%] w-full bg-white rounded-2xl dark:bg-slate-800 text-white mb-[7vh] sm:mb-0'>
+      <div className='sm:w-[40%] w-full bg-white rounded-2xl dark:bg-slate-800 text-white mb-[7vh] sm:mb-0 shadow-xl shadow-black'>
           {loading ? <Skeleton
               sx={{ bgcolor: 'grey', borderRadius: '8px', height: '100%', width: '100%' }}
               variant="rectangular"

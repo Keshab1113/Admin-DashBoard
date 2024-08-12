@@ -3,9 +3,10 @@ import widgetType from './WidgetAPI';
 import Wgm from "./Wgm"
 
 
-const WidgetModals = () => {
+const WidgetModals = ({data}) => {
     const [openwedget, setOpenwedget] = useState(false);
     const [modalContent, setModalContent] = useState(null);
+    
     const handleOpen = (content) => {
         setOpenwedget(true);
         setModalContent(content);
@@ -28,7 +29,7 @@ const WidgetModals = () => {
                 )
             }
             
-            <Wgm open={openwedget} handleClose={handleClose} widget={modalContent} />
+            <Wgm open={openwedget} handleClose={handleClose} widget={modalContent} data={data} />
         </div>
     )
 }

@@ -21,6 +21,7 @@ import LivePage from "./pages/LivePage/LivePage.jsx";
 import NoPage from "./pages/NoPage.jsx";
 import Login from "./pages/Login/Login.jsx";
 import SubscriptionExpired from './pages/SubscriptionPage/SubscriptionExpired.jsx';
+import Signup from './pages/SignUp/Signup.jsx';
 
 
 
@@ -38,7 +39,6 @@ const PrivateRoute = ({ element }) => {
           credentials: 'include',
         });
         const { user } = response.data;
-        console.log(user, 46)
         if (user) {
           dispatch(login(user));
         }
@@ -52,51 +52,13 @@ const PrivateRoute = ({ element }) => {
     checkAuth();
   }, [dispatch]);
 
-  // While loading, you can return a loading indicator or null
   if (loading) {
-    return null; // or return a loading spinner
+    return null;
   }
-
-  // Once loading is complete, render the appropriate component based on authentication
   return isAuthenticated ? element : <Navigate to="/login" replace />;
 };
 
-
-// const PrivateRoute = ({ element }) => {
-//   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-// console.log(isAuthenticated,26)
-//   return isAuthenticated ? element : <Navigate to="/login" replace />;
-// };
-
 function App() {
-  // const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(true);
-
-  // const backendUrl = 'http://localhost:5000';
-
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       const response = await axios.get(`${backendUrl}/api/auth/user`, {
-  //         withCredentials: true,
-  //         credentials: 'include',
-  //       });
-  //       const { user } = response.data;
-  //       console.log(user,46)
-  //       if (user) {
-  //         dispatch(login(user));
-  //       }
-  //     } catch (error) {
-  //       console.error('Error checking authentication:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   checkAuth();
-  // }, [dispatch]);
-
-
   return (
     <Router>
       <Routes>
@@ -130,15 +92,16 @@ function App() {
             element={<PrivateRoute element={<SubscriptionExpired />} />}
           />
           <Route
-            path="/live/historical"
+            path="/live/:id/historical"
             element={<PrivateRoute element={<Historical />} />}
           />
           <Route
-            path="/live/analytical"
+            path="/live/:id/analytical"
             element={<PrivateRoute element={<Analytical />} />}
           />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={NoPage} />
       </Routes>
     </Router>

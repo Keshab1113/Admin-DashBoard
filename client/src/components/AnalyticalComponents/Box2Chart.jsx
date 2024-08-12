@@ -1,75 +1,58 @@
-import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 
-const data = [
-    {
-        name: 'Page A',
-        uv: 1000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 2490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default class Example extends PureComponent {
-    static demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
+const Box2Chart = ({ data }) => {
+    return (
+        <div className="flex flex-wrap justify-center items-center gap-4 bg-gray-100 dark:bg-slate-800 p-4">
+            {data.map((item) => {
+                const chartData = {
+                    datasets: [
+                        {
+                            data: [item.v, 100 - item.v],  // Assuming 100 is the max value
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 1)',  // Filled part color
+                                'rgba(200, 200, 200, 0.5)',  // Background color for the rest
+                            ],
+                            borderWidth: 0,
+                            circumference: 180,
+                            rotation: -90,
+                        },
+                    ],
+                };
 
-    render() {
-        return (
-            <ResponsiveContainer width="100%" className=" p-4">
-                <AreaChart
-                    width={500}
-                    height={400}
-                    data={data}
-                    margin={{
-                        top: 10,
-                        right: 30,
-                        left: 0,
-                        bottom: 50,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-                </AreaChart>
-            </ResponsiveContainer>
-        );
-    }
-}
+                const options = {
+                    responsive: true,
+                    cutout: '80%',
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            enabled: false,
+                        },
+                    },
+                };
+
+                return (
+                    <div key={item.id} className="w-full max-w-xs relative">
+                        <Doughnut data={chartData} options={options} />
+                        <div className="absolute inset-0 flex flex-col justify-center items-center">
+                            <span className="text-lg font-semibold text-slate-700 dark:text-white">{item.n}</span>
+                            <span className="text-2xl font-semibold text-slate-700 dark:text-white">{`${item.v} ${item.u}`}</span>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+export default Box2Chart;

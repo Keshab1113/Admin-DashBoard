@@ -5,20 +5,15 @@ import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Link } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import MenuEditPage from "../../pages/MenuEditPage/MenuEditPage";
 import CloseIcon from '@mui/icons-material/Close';
-import Skeleton from 'react-loading-skeleton'
 import { MdDelete } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from 'react-redux';
-import { fetched } from '../../features/systemSlice';
-import axios from "axios";
-
-
-    
+import Toast from "../Toast/Toast";
 
 const style = {
     position: 'absolute',
@@ -34,13 +29,26 @@ const style = {
 
 
 
-const EditButton = (props) => {
+const EditButton = ({ machineName, deviceId, lst, lat, lon }) => {
     const dispatch = useDispatch();
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [toast, setToast] = useState({ show: false, message: '', type: '' });
+    
+    const triggerToast = (message, type) => {
+        setToast({ show: true, message, type });
+        setTimeout(() => {
+            setToast({ show: false, message: '', type: '' });
+        }, 3000);
+    };
+    const handleSuccess = () => {
+        triggerToast('System updated successfully', 'success');
+        setOpen(false);
+    };
+    
 
     const handleOpenUserMenu = async (event) => {
         event.stopPropagation();
@@ -54,45 +62,15 @@ const EditButton = (props) => {
     };
 
     const [openDelete, setOpenDelete] = React.useState(false);
-    const handleOpenDelete = () => setOpenDelete(true);
+    const handleOpenDelete = () => {
+        setOpenDelete(true); 
+    }
     const handleCloseDelete = () => setOpenDelete(false);
 
-    // useEffect(() => {
-    //     // Simulate loading for 5 seconds
-    //     const timeout = setTimeout(() => {
-    //         setLoading(false);
-    //     }, 5000);
 
-    //     return () => clearTimeout(timeout);
-    // }, []);
-
-    const handleDeleteSystem = async(deviceId) => {
-        console.log(deviceId, 65)
-        try {
-            const response = await axios.post(`http://localhost:5000/api/home/delSystem/${deviceId}`,{},{withCredentials:true});
-            console.log(response,73)
-            // setToastMsg(response.data.msg);
-            // setShowToast(true);
-            if (response.data.success) {
-                const response = await axios.post("http://localhost:5000/api/home/systems", {},
-                    {
-                        withCredentials: true,
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                const data = await response.data.sys;
-                dispatch(fetched(data));
-               
-                handleCloseDelete();
-
-            }else{
-                console.log(response,89)
-            }
-        } catch (error) {
-            console.log(error,90)
-        }
-
+    const handleDeleteSystem = () => {
+        triggerToast('You need permissions to delete the system.', 'error');
+        setOpenDelete(false);
     };
 
 
@@ -136,12 +114,12 @@ const EditButton = (props) => {
                                 Are you sure want to delete this item?
                                 <div className="mt-4 ">
                                     <button onClick={handleCloseDelete} className="px-2 py-2 mr-4 border rounded-lg bg-slate-300 border-slate-600">No, cancel</button>
-                                    <button onClick={()=>handleDeleteSystem(props.cardDetails.deviceId)} className="px-2 py-2 text-white bg-red-600 border rounded-lg ">Yes, I'm sure</button>
+                                    <button onClick={handleDeleteSystem} className="px-2 py-2 text-white bg-red-600 border rounded-lg ">Yes, I'm sure</button>
                                 </div>
                             </Typography>
                         </Box>
                     </Modal>
-                    <Link onClick={handleOpen} className="cursor-pointer "><EditCalendarIcon /></Link>
+                    <Link onClick={handleOpen} className="cursor-pointer "><ModeEditIcon /></Link>
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -158,15 +136,22 @@ const EditButton = (props) => {
                                 </div>
                             </Typography>
                             <Typography id="modal-modal-description">
-                                {loading ? <Skeleton count={6} /> :
-                                    <MenuEditPage cardDetails={props.cardDetails} />
-                                }
+                                <MenuEditPage machineName={machineName} deviceId={deviceId} lst={lst} lat={lat} lon={lon} />
+                                <div className=" flex h-[13vh] justify-end items-center pr-6 pb-4">
+                                    <button onClick={handleClose} className=" bg-slate-500 w-28 h-10 rounded-full mr-3 text-white">Cancel</button>
+                                    <button onClick={handleSuccess} className=" bg-blue-500 w-28 h-10 rounded-full text-white">Update</button>
+                                    
+                                </div>
                             </Typography>
                         </div>
-
+                        
                     </Modal>
+                    
                 </div>
             </Menu>
+            {toast.show && (
+                <Toast message={toast.message} type={toast.type} />
+            )}
         </Box>
     )
 }

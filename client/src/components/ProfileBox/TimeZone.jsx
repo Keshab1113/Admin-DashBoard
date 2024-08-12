@@ -11,7 +11,7 @@ const TimezoneSelector = () => {
 
     return (
         <div>
-            <h2 className=' mb-2 dark:text-white text-black'>Select Timezone</h2>
+            <h2 className=' mb-2 dark:text-white text-black font-semibold'>Select Timezone</h2>
             <TimezoneSelect
                 value={selectedTimezone}
                 onChange={handleTimezoneChange}

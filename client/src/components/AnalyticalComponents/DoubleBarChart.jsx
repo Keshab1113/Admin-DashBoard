@@ -19,25 +19,22 @@ ChartJS.register(
     Legend
 );
 
-const Box1Chart = ({ data}) => {
+const DoubleBarChart = ({ data }) => {
     const chartData = {
-        labels: data.map(item => item.n),
+        labels: data.map(item => item.n), // Sensor names as labels
         datasets: [
             {
-                label: 'Values',
-                data: data.map(item => item.v),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
+                label: 'Current Values',
+                data: data.map(item => item.v), // Current sensor values
+                backgroundColor: 'rgba(75, 192, 192, 0.6)', // Color for the first dataset
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: 'Max Possible Value', // Assuming 100 as a max possible value for comparison
+                data: data.map(() => 100), // Maximum possible value
+                backgroundColor: 'rgba(255, 99, 132, 0.6)', // Color for the second dataset
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1,
             },
         ],
@@ -51,7 +48,7 @@ const Box1Chart = ({ data}) => {
             },
             title: {
                 display: true,
-                text: 'Sensor Data',
+                text: 'Sensor Data Comparison',
             },
         },
         scales: {
@@ -62,7 +59,7 @@ const Box1Chart = ({ data}) => {
     };
 
     return (
-        <div className="flex justify-center items-center h-full bg-gray-100 dark:bg-slate-800">
+        <div className="flex justify-center items-center h-full bg-gray-100">
             <div className="w-full max-w-lg">
                 <Bar data={chartData} options={options} />
             </div>
@@ -70,4 +67,4 @@ const Box1Chart = ({ data}) => {
     );
 };
 
-export default Box1Chart;
+export default DoubleBarChart;

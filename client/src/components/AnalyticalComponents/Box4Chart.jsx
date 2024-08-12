@@ -1,38 +1,68 @@
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    ArcElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 
-const data01 = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-];
-const data02 = [
-    { name: 'A1', value: 100 },
-    { name: 'A2', value: 300 },
-    { name: 'B1', value: 100 },
-    { name: 'B2', value: 80 },
-    { name: 'B3', value: 40 },
-    { name: 'B4', value: 30 },
-    { name: 'B5', value: 50 },
-    { name: 'C1', value: 100 },
-    { name: 'C2', value: 200 },
-    { name: 'D1', value: 150 },
-    { name: 'D2', value: 50 },
-];
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    ArcElement,  // Register ArcElement for Pie chart
+    Title,
+    Tooltip,
+    Legend
+);
 
-export default class Example extends PureComponent {
+const Box4Chart = ({ data }) => {
+    const chartData = {
+        labels: data.map(item => item.n),
+        datasets: [
+            {
+                label: 'Values',
+                data: data.map(item => item.v),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
 
-    render() {
-        return (
-            <ResponsiveContainer width="100%" className=" px-4">
-                <PieChart width={400} height={200} margin={{
-                    bottom: 70,
-                }}>
-                    <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
-                    <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
-                </PieChart>
-            </ResponsiveContainer>
-        );
-    }
-}
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Sensor Data',
+            },
+        },
+    };
+
+    return (
+        <div className="flex justify-center items-center h-fit w-full bg-gray-100 dark:bg-slate-800">
+            <div className="w-full max-w-lg">
+                <Pie data={chartData} options={options} />
+            </div>
+        </div>
+    );
+};
+
+export default Box4Chart;

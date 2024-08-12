@@ -62,13 +62,13 @@ const UserProfileBox = () => {
         // Simulate loading for 5 seconds
         const timeout = setTimeout(() => {
             setLoading(false);
-        }, 4000);
+        }, 100);
 
         return () => clearTimeout(timeout);
     }, []);
     return (
         <>
-            <div className="bg-white  sm:w-[25%] rounded-2xl w-full flex flex-col justify-end items-center dark:bg-slate-800 dark:text-white mb-10">
+            <div className="bg-white  sm:w-[25%] rounded-2xl w-full flex flex-col justify-end items-center dark:bg-slate-800 dark:text-white mb-10 shadow-xl shadow-black">
                 {loading ? <Skeleton
                     sx={{ bgcolor: 'grey', borderRadius: '8px', height: '100%', width: '100%' }}
                     variant="rectangular"
@@ -76,12 +76,12 @@ const UserProfileBox = () => {
                 /> :
                     <>
                         <div className=" h-[52%] w-full flex flex-col justify-center items-center  dark:bg-slate-800 rounded-t-2xl">
-                            <div className="flex justify-center w-full pt-4 pb-4 border-b border-black shadow bg-slate-300 h-14 shadow-slate-100 dark:shadow-slate-600 dark:border-slate-600 rounded-t-2xl">
+                            <div className="flex justify-center w-full pt-4 pb-4 border-b border-black dark:bg-slate-600 bg-white h-14 dark:border-slate-600 rounded-t-2xl">
                                 <h1 className=" font-extrabold pb-2 px-6 w-[90%]  text-black text-lg dark:text-white">
                                     My Profile
                                 </h1>
                             </div>
-                            <div className="flex flex-col items-center justify-center w-full h-full mt-2 border-b border-black">
+                            <div className="flex flex-col items-center justify-center w-full h-full mt-2">
                                 <img
                                     style={{
                                         width: "150px",
@@ -94,7 +94,7 @@ const UserProfileBox = () => {
                                     src={profileFinal.length ? profileFinal : profilePhoto}
                                     alt="Profile photo"
                                 />
-                                {/* <div className=" bg-slate-300 rounded-md px-6 py-2 mt-6"><h1>Browse Photo</h1></div> */}
+                                
                             </div>
                             <Dialog
                                 className="p-2 rounded-md bg-slate-200"
@@ -150,12 +150,12 @@ const UserProfileBox = () => {
                                 }}
                             />
                         </div>
-                        <div className=" w-full h-[58%] px-6 py-4 bg-white dark:bg-slate-700 rounded-t-2xl rounded-b-2xl">
+                        <div className=" w-full h-[58%] px-6 py-4 bg-blue-600 dark:bg-slate-700 rounded-t-2xl rounded-b-2xl text-white">
                             <div className="flex items-center justify-between pb-2 mt-4 border-b border-slate-200">
                                 <h1 className="font-semibold ">
                                     UserName:
                                 </h1>
-                                <div>{user.user || <Skeleton />}</div>
+                                <div className="font-semibold">{user.username || <Skeleton />}</div>
                                 <button onClick={handleOpenUserName}>
                                     <EditIcon className="cursor-pointer " />
                                 </button>
@@ -171,7 +171,7 @@ const UserProfileBox = () => {
                                             Edit UserName
                                         </Typography>
                                         <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                                            <input type="text" name="address" value={user.user} id="" className="w-full " />
+                                            <input type="text" name="address" value={user.username} id="" className="w-full " />
                                             <div className="mt-4 ">
                                                 <button onClick={handleClose} className="px-4 py-2 mr-5 text-white bg-blue-600 border rounded-md ">Cancel</button>
                                                 <button className="px-4 py-2 text-white bg-blue-600 border rounded-md ">Save</button>
@@ -180,11 +180,11 @@ const UserProfileBox = () => {
                                     </Box>
                                 </Modal>
                             </div>
-                            <div className="flex items-center justify-between p-3 pb-2 mt-4 border-b border-slate-200">
+                            <div className="flex items-center justify-between pb-2 mt-4 border-b border-slate-200">
                                 <h1 className="font-semibold ">
                                     Email:
                                 </h1>
-                                <div>{user.email || <Skeleton />}</div>
+                                <div className="font-semibold">{user.email || <Skeleton />}</div>
                                 <button onClick={handleOpenEmail}>
                                     <EditIcon className="cursor-pointer " />
                                 </button>
@@ -236,7 +236,7 @@ const UserProfileBox = () => {
                                 </Modal>
                             </div>
                             <div className="flex items-center justify-between pb-2 mt-4 border-b border-white ">
-                                <h1 className="font-semibold ">Company: PLC LTD.</h1>
+                                <h1 className="font-semibold ">Company: XYZ LTD.</h1>
                                 <button onClick={handleOpenCompany}>
                                     <EditIcon className="cursor-pointer " />
                                 </button>
@@ -252,7 +252,7 @@ const UserProfileBox = () => {
                                             Edit Company Name
                                         </Typography>
                                         <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                                            <input type="text" name="address" value={"PLC LTD."} id="" className="w-full " />
+                                            <input type="text" name="address" value={"XYZ LTD."} id="" className="w-full " />
                                             <div className="mt-4 ">
                                                 <button onClick={handleClose} className="px-4 py-2 mr-5 text-white bg-blue-600 border rounded-md ">Cancel</button>
                                                 <button className="px-4 py-2 text-white bg-blue-600 border rounded-md ">Save</button>

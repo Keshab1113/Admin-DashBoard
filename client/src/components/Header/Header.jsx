@@ -18,6 +18,7 @@ import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import { useSelector } from 'react-redux';
 import Search from "./Search";
+import logo from "/default.png"
 
 
 function Navbar() {
@@ -29,6 +30,11 @@ function Navbar() {
   const logoUrl = useSelector((state) => state.user.logoUrl);
   
 
+  const getIdFromPath = () => {
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    return pathSegments[1];
+  };
+  const id = getIdFromPath();
   
 
   const showSidebar = () => {
@@ -39,7 +45,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-900 h-[8vh] border-b-2 dark:border-slate-700 flex fixed w-full justify-between z-50">
+      <div className="bg-white dark:bg-slate-900 h-[8vh] border-b-2 dark:border-slate-700 flex fixed w-full justify-between z-50 ">
         <div className="sm:w-[10%] w-[30%] h-full flex justify-around items-center pl-5">
           <button
             onClick={showSidebar}
@@ -50,7 +56,7 @@ function Navbar() {
             }
           </button>
           <Link to={"/"}>
-            <img src={logoUrl} alt="Company logo" width="auto" height={50} title="Home"/>
+            <img src={logo} alt="Company logo" width="auto" height={50} title="Home"/>
           </Link>
         </div>
         
@@ -62,20 +68,7 @@ function Navbar() {
           </div>
           <ThemeChange />
           <div className="flex items-center justify-start ">
-            {isAuthenticated ? (
-              <>
-                <User />
-              </>
-            ) : (
-              <>
-                {/* <Link to={"/login"}>
-                    <Button variant="outlined" sx={{ marginRight: "10px", width: "50px", marginLeft:"5px" }}>Login</Button>
-                </Link>
-                  <Link to={"/signup"}>
-                    <Button variant="outlined" sx={{ marginRight: "", width: "50px" }}>Signup</Button>
-                  </Link> */}
-              </>
-            )}
+            {isAuthenticated && <User />}
           </div>
         </div>
       </div>
@@ -103,14 +96,14 @@ function Navbar() {
                 <InsertChartOutlinedIcon className="" />
                 Live
               </NavLink>
-              <NavLink to={"/live/historical"} className={({ isActive }) =>
+              <NavLink to={`/live/${id}/historical`} className={({ isActive }) =>
                 ` w-full border-b-2 border-white text-end px-1 py-2 duration-200 hover:bg-blue-400 hover:text-white ${isActive ? " bg-blue-500 text-white" : " text-black dark:text-white"
                 }`
               }>
                 <ManageHistoryIcon className="mr-1 " />
                 Historian
               </NavLink>
-              <NavLink to="/live/analytical" className={({ isActive }) =>
+              <NavLink to={`/live/${id}/analytical`} className={({ isActive }) =>
                 `w-full border-b-2 border-white text-end py-2 px-1 duration-200 hover:bg-blue-400 hover:text-white ${isActive ? "bg-blue-500 text-white " : " text-black dark:text-white"
                 }`
               }>

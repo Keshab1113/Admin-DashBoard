@@ -15,12 +15,12 @@ const Toast = ({ message, type, duration = 3000 }) => {
 
     return (
         <div
-            className="fixed z-10 flex justify-center w-full text-center bottom-10" 
+            className=" absolute z-[999999] w-fit text-center top-2 right-2"
         >
             <div className={`p-3 rounded-lg shadow-xl shadow-black ${type === 'error'
             ? 'bg-red-500 text-white'
             : type === 'success'
-            ? 'bg-green-500 text-white'
+                    ? 'bg-[#17a817] text-white'
             : 'bg-blue-500 text-white'
                 } ${show ? 'opacity-100' : 'opacity-0 transition-opacity duration-300 ease-in-out'}`}>
                 {message}

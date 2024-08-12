@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
-  user: {
+  username: {
     type: String,
   },
   email: {
@@ -15,7 +15,7 @@ const profileSchema = new Schema({
   },
   projectName: {
     type: String,
-    default: "MANUFACTURING INTELLIGENCE SOFTWARE"
+    default: "ABC Project"
   },
   role: {
     type: Number,

@@ -14,9 +14,7 @@ const Logout = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response,19)
             if (response.status === 200) {
-                console.log("19 logout")
                 dispatch(logout());
                 return <Navigate to="/login" replace />;
             } else {
