@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuEditPage = ({ machineName, deviceId, lst, lat, lon }) => {
+const MenuEditPage = ({ machineName, id , lst, lat, lon }) => {
     
     return (
         <div className=" h-full w-full rounded-md border-y-2 border-slate-200">
@@ -11,7 +11,7 @@ const MenuEditPage = ({ machineName, deviceId, lst, lat, lon }) => {
                     </div>
                     <div className=" flex justify-between">
                         <h1>Device ID:</h1>
-                    <input type="text" value={deviceId} name="" id="" className="w-[50%] h-8 rounded-full px-4 outline-none border-[1.5px] border-black dark:bg-slate-600" />
+                    <input type="text" value={id} name="" id="" className="w-[50%] h-8 rounded-full px-4 outline-none border-[1.5px] border-black dark:bg-slate-600" />
                     </div>
                     <div className=" flex justify-between">
                         <h1>Installed at:</h1>

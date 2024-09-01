@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const homeCon = require("../controllers/home-controller.js");
-const { isAuthenticated } = require('../middlewares/auth-middleware.js')
+const homeCon = require("../controllers/home-controller");
+const { validateDevice, validateDeviceId } = require("../validators/deviceValidator");
 
-
-
-router.route("/systems").post(isAuthenticated, homeCon.getHomeData);
-router.route("/addSystem").post(isAuthenticated, homeCon.addSystem);
-router.route("/updateSystem").post(isAuthenticated, homeCon.updateSystem);
-router.route("/delSystem").post(isAuthenticated, homeCon.deleteSystem);
+router.route('/devices').get(homeCon.getHomeData);
+router.route("/addSystem").post(validateDevice, homeCon.addSystem);
+router.route("/updateSystem/:id").post(validateDeviceId, validateDevice, homeCon.updateSystem);
+router.route("/delSystem/:id").delete( homeCon.deleteSystem);
 
 
 module.exports = router;

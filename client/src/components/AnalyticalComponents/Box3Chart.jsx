@@ -20,20 +20,30 @@ ChartJS.register(
     Tooltip,
     Legend
 );
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Box3Chart = ({ data }) => {
-    const labels = data.map(item => item.n); // Using sensor names as labels
+const Box3Chart = () => {
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
+    const labels = device.params.map(item => item.n);
 
     const chartData = {
-        labels, // Labels for the x-axis
+        labels,
         datasets: [
             {
                 label: 'Sensor Values',
-                data: data.map(item => item.v), // Sensor values
+                data: device.params.map(item => item.v),
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
-                tension: 0.4, // Curve the line
+                tension: 0.4,
                 pointBackgroundColor: 'rgba(75, 192, 192, 1)',
             },
         ],
@@ -58,7 +68,7 @@ const Box3Chart = ({ data }) => {
     };
 
     return (
-        <div className="flex justify-center items-center h-full bg-gray-100 dark:bg-slate-800">
+        <div className="flex justify-center items-center h-full dark:bg-slate-800 mb-10 mt-4">
             <div className="w-full max-w-lg">
                 <Line data={chartData} options={options} />
             </div>

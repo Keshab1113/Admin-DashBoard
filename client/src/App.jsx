@@ -16,7 +16,6 @@ import UserProfile from "./pages/UserProfile/UserProfile.jsx";
 import Historical from "./pages/Histroical/Historical.jsx";
 import Analytical from "./pages/Analytical/Analytical.jsx";
 import DummyPage from "./pages/DummyPage/DummyPage.jsx";
-import  Logout  from "./pages/Logout/Logout.jsx";
 import LivePage from "./pages/LivePage/LivePage.jsx";
 import NoPage from "./pages/NoPage.jsx";
 import Login from "./pages/Login/Login.jsx";
@@ -24,85 +23,52 @@ import SubscriptionExpired from './pages/SubscriptionPage/SubscriptionExpired.js
 import Signup from './pages/SignUp/Signup.jsx';
 
 
-
-const PrivateRoute = ({ element }) => {
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const [loading, setLoading] = useState(true);
-  const backendUrl = 'http://localhost:5000';
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get(`${backendUrl}/api/auth/user`, {
-          withCredentials: true,
-          credentials: 'include',
-        });
-        const { user } = response.data;
-        if (user) {
-          dispatch(login(user));
-        }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, [dispatch]);
-
-  if (loading) {
-    return null;
-  }
-  return isAuthenticated ? element : <Navigate to="/login" replace />;
+const PrivateRoute = ({ children }) => {
+  const isLogedin = useSelector(state => state.user.isLogedin);
+  return isLogedin ? children : <Navigate to="/login" />;
 };
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route
             path="/"
-            element={<PrivateRoute element={<Home />} />}
-          />
-          <Route
-            path="/logout"
-            element={<PrivateRoute element={<Logout />} />}
+            element={<PrivateRoute><Home /></PrivateRoute>}
           />
           <Route
             path="/live/*"
-            element={<PrivateRoute element={<LivePage />} />}
+            element={<PrivateRoute><LivePage /></PrivateRoute>}
           />
           <Route
-            path="/DeviceSettings"
-            element={<PrivateRoute element={<DeviceSettings />} />}
+            path="/dashboard"
+            element={<PrivateRoute><DeviceSettings /></PrivateRoute>}
           />
           <Route
             path="/profile"
-            element={<PrivateRoute element={<UserProfile />} />}
+            element={<PrivateRoute><UserProfile /></PrivateRoute>}
           />
           <Route
-            path="/dummypage"
-            element={<PrivateRoute element={<DummyPage />} />}
+            path="/plant"
+            element={<PrivateRoute><DummyPage /></PrivateRoute>}
           />
           <Route
             path="/subscription"
-            element={<PrivateRoute element={<SubscriptionExpired />} />}
+            element={<PrivateRoute><SubscriptionExpired /></PrivateRoute>}
           />
           <Route
             path="/live/:id/historical"
-            element={<PrivateRoute element={<Historical />} />}
+            element={<PrivateRoute><Historical /></PrivateRoute>}
           />
           <Route
             path="/live/:id/analytical"
-            element={<PrivateRoute element={<Analytical />} />}
+            element={<PrivateRoute><Analytical /></PrivateRoute>}
           />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={NoPage} />
+        <Route path="*" element={<NoPage/>} />
       </Routes>
     </Router>
   );

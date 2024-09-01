@@ -18,22 +18,34 @@ ChartJS.register(
     Tooltip,
     Legend
 );
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const DoubleBarChart = ({ data }) => {
+const DoubleBarChart = () => {
+
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
+
     const chartData = {
-        labels: data.map(item => item.n), // Sensor names as labels
+        labels: device.params.map(item => item.n),
         datasets: [
             {
                 label: 'Current Values',
-                data: data.map(item => item.v), // Current sensor values
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', // Color for the first dataset
+                data: device.params.map(item => item.v),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
             {
-                label: 'Max Possible Value', // Assuming 100 as a max possible value for comparison
-                data: data.map(() => 100), // Maximum possible value
-                backgroundColor: 'rgba(255, 99, 132, 0.6)', // Color for the second dataset
+                label: 'Max Possible Value',
+                data: device.params.map(() => 100),
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1,
             },

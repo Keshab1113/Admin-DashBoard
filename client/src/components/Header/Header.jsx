@@ -13,12 +13,14 @@ import DevicesIcon from '@mui/icons-material/Devices';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 import User from './User';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import Notification from "./Notification";
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
-import logo from "/default.png"
+import logo from "/logo.png"
+import { logout } from "../../features/userSlice";
 
 
 function Navbar() {
@@ -26,8 +28,7 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const [ismenu, setIsmenu] = useState(true);
   const isLivePage = location.pathname.startsWith('/live/');
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const logoUrl = useSelector((state) => state.user.logoUrl);
+  const dispatch = useDispatch();
   
 
   const getIdFromPath = () => {
@@ -35,6 +36,10 @@ function Navbar() {
     return pathSegments[1];
   };
   const id = getIdFromPath();
+
+  const logouthandle = () => {
+    dispatch(logout());
+  }
   
 
   const showSidebar = () => {
@@ -45,8 +50,8 @@ function Navbar() {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-900 h-[8vh] border-b-2 dark:border-slate-700 flex fixed w-full justify-between z-50 ">
-        <div className="sm:w-[10%] w-[30%] h-full flex justify-around items-center pl-5">
+      <div className="bg-white dark:bg-slate-900 h-[10vh] border-b-2 dark:border-slate-700 flex fixed w-full justify-between z-50 top-0">
+        <div className="sm:w-[8%] w-[20%] h-full flex justify-around items-center pl-5">
           <button
             onClick={showSidebar}
             className="bg-white cursor-pointer text-red dark:text-white dark:bg-slate-900"
@@ -56,7 +61,7 @@ function Navbar() {
             }
           </button>
           <Link to={"/"}>
-            <img src={logo} alt="Company logo" width="auto" height={50} title="Home"/>
+            <img src={logo} alt="Company logo" width="auto" className="h-8 w-8 rounded" title="Home"/>
           </Link>
         </div>
         
@@ -64,11 +69,10 @@ function Navbar() {
           <Search/>
           <div className="flex items-center justify-center h-14 w-14 border-x-2 dark:border-slate-700">
             <Notification/>
-            {/* <Noti/> */}
           </div>
           <ThemeChange />
           <div className="flex items-center justify-start ">
-            {isAuthenticated && <User />}
+            <User />
           </div>
         </div>
       </div>
@@ -112,7 +116,7 @@ function Navbar() {
               </NavLink>
             </>
           }
-          <NavLink to={"/DeviceSettings"} className={({ isActive }) =>
+          <NavLink to={"/dashboard"} className={({ isActive }) =>
             `sidebaritems duration-200 ${isActive ? "bg-blue-500 text-white " : " text-black"
             }`
           }>
@@ -133,13 +137,17 @@ function Navbar() {
             <AccountCircleIcon className="" />
             Profile
           </NavLink>
-          <NavLink to={"/logout"} className={({ isActive }) =>
+          <NavLink to={"subscription"} className={({ isActive }) =>
             `sidebaritems duration-200 ${isActive ? "bg-blue-500 text-white " : " text-black"
             }`
           }>
+            <SubscriptionsIcon className="" />
+            Subscription
+          </NavLink>
+          <button onClick={logouthandle} className="sidebaritems duration-200">
             <LogoutIcon className="rotate-180 " />
             Logout
-          </NavLink>
+          </button>
         </ul>
       </nav>
     </>

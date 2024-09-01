@@ -13,19 +13,31 @@ import {
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    ArcElement,  // Register ArcElement for Pie chart
+    ArcElement,
     Title,
     Tooltip,
     Legend
 );
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Box4Chart = ({ data }) => {
+const Box4Chart = () => {
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
+
+
     const chartData = {
-        labels: data.map(item => item.n),
+        labels: device.params.map(item => item.n),
         datasets: [
             {
                 label: 'Values',
-                data: data.map(item => item.v),
+                data: device.params.map(item => item.v),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',
@@ -57,7 +69,7 @@ const Box4Chart = ({ data }) => {
     };
 
     return (
-        <div className="flex justify-center items-center h-fit w-full bg-gray-100 dark:bg-slate-800">
+        <div className="flex justify-center items-center h-fit w-full  dark:bg-slate-800 mb-10 mt-4">
             <div className="w-full max-w-lg">
                 <Pie data={chartData} options={options} />
             </div>

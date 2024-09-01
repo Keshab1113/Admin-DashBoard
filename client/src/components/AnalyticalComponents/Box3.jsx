@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import Box3Chart from "./Box3Chart"
 import Skeleton from '@mui/material/Skeleton';
 
-const Box3 = ({data}) => {
+const Box3 = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -20,7 +19,10 @@ const Box3 = ({data}) => {
                 variant="rectangular"
                 height={200}
             /> :
-                <Box3Chart data={data} />}
+                <><div className=' border-b rounded-t-lg px-4 py-2 dark:text-white dark:border-slate-600'> <h1 className=' text-2xl font-extrabold'>Line Chart</h1></div>
+                    <Box3Chart />
+            </>
+            }
         </div>
     )
 }

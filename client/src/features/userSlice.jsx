@@ -3,26 +3,34 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        isAuthenticated: false,
         user: null,
-        logoUrl: 'https://rms.imatrixautomation.com/logo/default.png',
+        token: null,
+        systems: [],
+        isLogedin: false,
     },
     reducers: {
         login: (state, action) => {
-            state.isAuthenticated = true;
-            state.user = action.payload;
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isLogedin = action.payload.isLogedin;
         },
         logout: (state) => {
-            state.isAuthenticated = false;
             state.user = null;
+            state.token = null;
+            state.systems = [];
+            state.isLogedin = false;
         },
         register: (state, action) => {
-            state.isAuthenticated = true;
-            state.user = action.payload;
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isLogedin = action.payload.isLogedin;
         },
+        fetched: (state, action) => {
+            state.systems = action.payload.systems;
+        }
     },
 });
 
-export const { login, logout, register } = userSlice.actions;
+export const { login, logout, register, fetched } = userSlice.actions;
 export const selectUser = (state) => state.user;
 export default userSlice.reducer;

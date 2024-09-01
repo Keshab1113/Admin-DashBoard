@@ -1,311 +1,29 @@
+const Device = require('../models/data');
+
 const getHomeData = async (req, res) => {
   try {
-    const systemData = [
-      {
-        deviceId: "123",
-        siteName: "Pune",
-        machineName: "System 1",
-        lst: "2024-03-07 21:56",
-        isOnline: true,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 10) + 25,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 30) + 12,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "124",
-        siteName: "Kolkata",
-        machineName: "System 2",
-        lst: "2024-07-27 01:33",
-        isOnline: false,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "125",
-        siteName: "Mumbai",
-        machineName: "System 3",
-        lst: "2024-01-12 22:18",
-        isOnline: null,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "126",
-        siteName: "Goa",
-        machineName: "System 4",
-        lst: "2024-03-07 21:56",
-        isOnline: true,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "127",
-        siteName: "Ahmedabad",
-        machineName: "System 5",
-        lst: "2024-03-07 21:56",
-        isOnline: true,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 25,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "128",
-        siteName: "Lucknow",
-        machineName: "System 6",
-        lst: "2024-05-17 22:56",
-        isOnline: true,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 25,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "129",
-        siteName: "Chennai",
-        machineName: "System 7",
-        lst: "2024-03-07 21:56",
-        isOnline: true,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 25,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-      {
-        deviceId: "130",
-        siteName: "Bengaluru",
-        machineName: "System 8",
-        lst: "2023-11-07 19:16",
-        isOnline: false,
-        lat: "22.232",
-        lon: "77.5215",
-        params: [
-          {
-            id: "A1",
-            n: "Temperature",
-            u: "C",
-            v: Math.floor(Math.random() * 20) + 25,
-          },
-          {
-            id: "A2",
-            n: "Pressure",
-            u: "bar",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A3",
-            n: "Flow Rate",
-            u: "m3/hr",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-          {
-            id: "A4",
-            n: "Gas",
-            u: "Kohm",
-            v: Math.floor(Math.random() * 20) + 20,
-          },
-        ],
-      },
-    ]
-    res.status(200).json({
-      success: true,
-      systemData,
-      msg: "All Systems Data"
-    });
+    const devices = await Device.find();
+    res.status(200).json({devices});
   } catch (error) {
-    res.json({
-      message: error,
+    res.status(500).json({
+      message: error.message,
       success: false,
       data: []
-    })
+    });
   }
-  
-}
+};
 
 const addSystem = async (req, res) => {
   try {
-    res.json({
+    const newSystem = await Device.create(req.body);
+    res.status(201).json({
       message: "System added successfully",
       success: true,
+      data: newSystem,
     });
   } catch (error) {
-    res.json({
-      message: error,
+    res.status(400).json({
+      message: error.message,
       success: false,
     });
   }
@@ -313,13 +31,15 @@ const addSystem = async (req, res) => {
 
 const updateSystem = async (req, res) => {
   try {
-    res.json({
-      message: "System Updated successfully",
+    const updatedSystem = await Device.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json({
+      message: "System updated successfully",
       success: true,
+      data: updatedSystem,
     });
   } catch (error) {
-    res.json({
-      message: error,
+    res.status(400).json({
+      message: error.message,
       success: false,
     });
   }
@@ -327,17 +47,40 @@ const updateSystem = async (req, res) => {
 
 const deleteSystem = async (req, res) => {
   try {
-    res.json({
-      message: "System Deleted successfully",
+    // Validate that the ID is provided
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        message: "System ID is required",
+        success: false,
+      });
+    }
+
+    // Check if the system exists
+    const system = await Device.findById(id);
+    if (!system) {
+      return res.status(404).json({
+        message: "System not found",
+        success: false,
+      });
+    }
+
+    // Delete the system
+    await Device.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: "System deleted successfully",
       success: true,
     });
   } catch (error) {
-    res.json({
-      message: error,
+    console.error(error);
+    res.status(500).json({
+      message: "An error occurred while deleting the system",
       success: false,
     });
   }
 };
+
 
 module.exports = {
   getHomeData,

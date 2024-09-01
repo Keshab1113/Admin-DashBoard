@@ -17,7 +17,7 @@ import HistogramChart from '../AnalyticalComponents/HistogramChart';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const GridPage = ({ data }) => {
+const GridPage = () => {
     const { gridData } = useContext(GridContext);
     const { layout, setLayout } = useContext(LayoutContext);
     
@@ -36,11 +36,11 @@ const GridPage = ({ data }) => {
                         <h1 className=' text-2xl font-bold text-center dark:text-white'>{item.data.name} Chart</h1>
                         </div>
                         <div className=' overflow-hidden h-[80%]  text-white mx-2'>
-                            {item.data.name === 'Gauge' && <Box2Chart data={data.params} />}
-                            {item.data.name === 'Line' && <Box3Chart data={data.params} />}
+                            {item.data.name === 'Gauge' && <Box2Chart/>}
+                            {item.data.name === 'Line' && <Box3Chart/>}
                             {item.data.name === 'Image' && <img src="https://i.ytimg.com/vi/R-ZsuhxueyI/maxresdefault.jpg" alt="" />}
                             {item.data.name === 'Clock' && <img src="https://images.pexels.com/photos/359989/pexels-photo-359989.jpeg?cs=srgb&dl=pexels-fecundap6-359989.jpg&fm=jpg" alt="" />}
-                            {item.data.name === 'Double' && <DoubleBarChart data={data.params} />}
+                            {item.data.name === 'Double' && <DoubleBarChart/>}
                             {item.data.name === 'Map' && <MapContainer center={[51.505, -0.09]} zoom={20} scrollWheelZoom={true}>
                                 <TileLayer
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -52,14 +52,14 @@ const GridPage = ({ data }) => {
                                     </Popup>
                                 </Marker>
                             </MapContainer>}
-                            {item.data.name === 'Pie' && <Box4Chart data={data.params} />}
-                            {item.data.name === 'Bar' && <Box1Chart data={data.params}/>}
+                            {item.data.name === 'Pie' && <Box4Chart/>}
+                            {item.data.name === 'Bar' && <Box1Chart/>}
                             {item.data.name === 'Metric' && <img src="https://www.investopedia.com/thmb/3x0sL27fLZ1TrSyEjDdkDAkwL-I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/metrics.aspfinal-40312c5e32ab4aadbb522fa7566ebe40.jpg" alt="" />}
                             {item.data.name === 'Input' && <img src="https://goglobalways.com/wp-content/uploads/2023/05/input-device.jpg" alt="" />}
                             {item.data.name === 'Indicator' && <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO9CgqiCrnvuclX5zg3MC8FwDM4BgB1prhQQ&s" alt="" />}
-                            {item.data.name === 'Histogram' && <HistogramChart data={data.params} />}
+                            {item.data.name === 'Histogram' && <HistogramChart/>}
                             {item.data.name === 'HTML' && <img src="https://www.investopedia.com/thmb/33J47lYaGMBV4nx8vdJNtHBv3cY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/html.asp-final-86da30eff12f46f3a1394efb0b137103.png" alt="" />}
-                            {item.data.name === 'Table' && <TableChart data={data.params} />}
+                            {item.data.name === 'Table' && <TableChart/>}
                             {item.data.name === 'Battery' && <img src="https://images.presentationgo.com/2020/01/Battery-Fraction-Chart-PowerPoint.png" alt="" />}
                         </div>
                     </div>

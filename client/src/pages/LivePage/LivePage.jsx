@@ -10,7 +10,7 @@ const LivePage = () => {
   
 
   return (
-    <div className=' mt-[8vh] bg-slate-100 h-full w-screen pb-[5rem] dark:bg-slate-900 overflow-x-hidden px-2'>
+    <div className=' pt-[10vh] bg-slate-100 h-full w-screen pb-[5rem] dark:bg-slate-900 overflow-x-hidden px-2 min-h-screen'>
       <Helmet>
         <meta charSet="utf-8" />
         <title>Live View | </title>
@@ -24,9 +24,9 @@ const LivePage = () => {
         <h1 className='text-sm font-semibold w-full sm:w-auto'>Last updated: {data.lst}</h1>
         <div className='flex flex-col sm:flex-row w-full sm:w-fit gap-4'>
           {data.params.map((ed) => {
-            const { id, n, u, v } = ed;
+            const { _id, n, u, v } = ed;
             return (
-              <div className='flex items-center justify-start text-sm gap-1 w-full sm:w-auto' key={`${id}`}>
+              <div className='flex items-center justify-start text-sm gap-1 w-full sm:w-auto' key={`${_id}`}>
                 <h1 className='font-bold'>{n}:</h1>
                 <h1 className='font-bold'>{v}<span className='text-blue-700'>{u}</span></h1>
               </div>

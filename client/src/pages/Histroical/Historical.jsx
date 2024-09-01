@@ -12,7 +12,6 @@ import Skeleton from '@mui/material/Skeleton';
 const Historical = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        // Simulate loading for 5 seconds
         const timeout = setTimeout(() => {
             setLoading(false);
         }, 150);
@@ -20,13 +19,13 @@ const Historical = () => {
         return () => clearTimeout(timeout);
     }, []);
   return (
-      <div className=' mt-[8vh]'>
+      <div className=' mt-[8vh] h-full bg-slate-950'>
           <Helmet>
               <meta charSet="utf-8" />
               <title>Historical Page</title>
               <link rel="canonical" href="http://mysite.com/example" />
           </Helmet>
-          <div className=' bg-slate-200 dark:bg-slate-900 h-[46vh] w-full p-2'>
+          <div className='   h-full w-full p-6'>
               {loading ? <Skeleton
                   sx={{ bgcolor: 'gray.100', borderRadius: '8px', height: '100%', width: '100%' }}
                   animation="wave"
@@ -56,8 +55,8 @@ const Historical = () => {
                       <Chart2 />
                   }
               </div>
-      </div>
-          <div className=' bg-slate-200 dark:bg-slate-900 h-[46vh] w-full p-2'>
+        </div>
+          <div className='   h-full w-full p-6 '>
               {
                   loading ? <Skeleton
                       sx={{ bgcolor: 'gray.100', borderRadius: '8px', height: '100%', width: '100%' }}

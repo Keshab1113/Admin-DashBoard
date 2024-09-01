@@ -3,7 +3,8 @@ import widgetType from './WidgetAPI';
 import Wgm from "./Wgm"
 
 
-const WidgetModals = ({data}) => {
+const WidgetModals = ({ data }) => {
+    
     const [openwedget, setOpenwedget] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     

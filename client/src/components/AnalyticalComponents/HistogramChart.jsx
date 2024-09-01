@@ -18,13 +18,23 @@ ChartJS.register(
     Tooltip,
     Legend
 );
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const HistogramChart = ({ data }) => {
-    // Grouping the data into ranges for the histogram
-    const valueRanges = [0, 10, 20, 30, 40, 50]; // Define the ranges
+const HistogramChart = () => {
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
+
+    const valueRanges = [0, 10, 20, 30, 40, 50];
     const histogramData = valueRanges.map((range, index) => {
         if (index === valueRanges.length - 1) return null;
-        return data.filter(item => item.v >= range && item.v < valueRanges[index + 1]).length;
+        return device.params.filter(item => item.v >= range && item.v < valueRanges[index + 1]).length;
     }).filter(val => val !== null);
 
     const chartData = {
@@ -55,7 +65,7 @@ const HistogramChart = ({ data }) => {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 1, // Adjust the step size for the y-axis
+                    stepSize: 1,
                 },
             },
         },

@@ -1,6 +1,16 @@
 import React from 'react';
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const TableChart = ({ data }) => {
+const TableChart = () => {
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
     return (
         <div className="flex justify-center items-center h-full bg-gray-100 p-4">
             <div className="w-full max-w-lg">
@@ -14,7 +24,7 @@ const TableChart = ({ data }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item) => (
+                        {device.params.map((item) => (
                             <tr key={item.id}>
                                 <td className="py-2 px-4 border-b">{item.id}</td>
                                 <td className="py-2 px-4 border-b">{item.n}</td>

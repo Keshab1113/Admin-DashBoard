@@ -9,6 +9,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import BackupIcon from '@mui/icons-material/Backup';
 import axios from 'axios';
 import WidgetModals from '../../components/LivePage/WidgetModals';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const LivePageSubHeader = ({data}) => {
@@ -32,7 +33,7 @@ const LivePageSubHeader = ({data}) => {
     };
 
     const handleSave = () => {
-        alert("All data are saved.");
+        toast.success("All data are saved.");
     };
 
     useEffect(() => {
@@ -51,6 +52,10 @@ const LivePageSubHeader = ({data}) => {
               <Button onClick={handleSave} variant="contained" size="small" endIcon={<BackupIcon />}>
                   Save
               </Button>
+              <Toaster
+                  position="top-right"
+                  reverseOrder={false}
+              />
           </div>
           <Modal
               open={widgets}
@@ -63,9 +68,9 @@ const LivePageSubHeader = ({data}) => {
                       <h2 id="parent-modal-title" className='text-2xl font-bold '>Add New Widget</h2>
                       <IconButton aria-label="cancel" onClick={handleClose} ><CancelRoundedIcon className=' dark:text-white' /></IconButton>
                   </div>
-                  <p id="parent-modal-description">
+                  <div id="parent-modal-description">
                       <WidgetModals data={data} />
-                  </p>
+                  </div>
               </Box>
           </Modal>
       </div>

@@ -5,11 +5,10 @@ import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { useDispatch } from 'react-redux';
-import { register } from '../../features/userSlice';
-import axios from 'axios';
 import { Spinner } from "flowbite-react";
 import { Label, TextInput } from "flowbite-react";
 import Banner from '../../components/LoginAndSignupBanner/Banner';
+import { register } from '../../features/userSlice';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -38,31 +37,25 @@ const Signup = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup',
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
                 {
-                    username: user.username,
-                    email: user.email,
-                    password: user.password,
-                },
-                {
-                    withCredentials: true,
-                    credentials: 'include',
-                }
-            );
-            if (response.statusText === 'OK') {
-                if (response.data.success) {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":"application/json",
+                    },
+                    body: JSON.stringify(user),
+                });
+            const res_data = await response.json();
+            if (response.ok) {
+                dispatch(register({ user: res_data.userDetails, token: res_data.token, isLogedin: true }));
                     setUser({
                         username: "",
                         email: "",
                         password: "",
                     });
-                    dispatch(register(response.data.user));
                     navigate("/");
-                } else {
-                    setErrMsg(response.data.msg);
-                }
             } else {
-                console.log("object")
+                setErrMsg(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
         } catch (error) {
             setErrMsg(`${error.message}. Please try again later.`);

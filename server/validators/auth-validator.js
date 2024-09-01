@@ -15,7 +15,7 @@ const loginSchema = z.object({
 
 const signupSchema = loginSchema.extend({
   username: z
-    .string({ required_error: "Name is required" })
+    .string({ required_error: "Username is required" })
     .trim()
     .min(3, { message: "Name must be at least of 3 characters." })
     .max(255, { message: "Name must not be more than 255 characters." }),

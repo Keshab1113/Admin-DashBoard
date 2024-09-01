@@ -33,7 +33,7 @@ const Search = () => {
               type="text"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              className={`search-input h-full w-full bg-white dark:bg-slate-600 ${isActive ? 'active' : ''}`}
+              className={`search-input dark:text-white h-full w-full bg-white dark:bg-slate-600 ${isActive ? 'active' : ''}`}
               placeholder="Search..."
           />
           <button className={`search-icon bg-white dark:bg-slate-700 text-[#664AFF] dark:text-white flex justify-center items-center ${isActive ? 'active' : ''}`}

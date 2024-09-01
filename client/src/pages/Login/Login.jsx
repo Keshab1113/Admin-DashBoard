@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../features/userSlice';
 import axios from 'axios';
 import { Spinner } from "flowbite-react";
-import {  Label, TextInput } from "flowbite-react";
 import Banner from '../../components/LoginAndSignupBanner/Banner';
 
 
@@ -43,30 +41,25 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login',
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
                 {
-                    email: user.email,
-                    password: user.password,
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user),
                 },
-                {
-                    withCredentials: true,
-                    credentials: 'include',
-                }
             );
-            if (response.statusText == 'OK') {
-
-                if (response.data.success) {
+            const res_data = await response.json();
+            if (response.ok) {
+                dispatch(login({ user: res_data.userDetails, token: res_data.token, isLogedin:true }));
                     setUser({
                         email: "",
                         password: "",
                     });
-                    dispatch(login(response.data.user));
-                    navigate("/");
+                navigate("/");
                 } else {
-                    setErrMsg(response.data.msg);
-                }
-            } else {
-                console.log("object")
+                setErrMsg(res_data.extraDetails ? res_data.extraDetails : res_data.message)
             }
         } catch (error) {
             setErrMsg(`${error.message}. Please try again later.`);

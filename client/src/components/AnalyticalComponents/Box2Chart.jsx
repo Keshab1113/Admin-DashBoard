@@ -6,13 +6,24 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Box2Chart = ({ data }) => {
+const Box2Chart = () => {
+    const system = useSelector((state) => state.user.systems);
+    const location = useLocation();
+    const getIdFromPath = () => {
+        const pathSegments = location.pathname.split("/").filter(Boolean);
+        return pathSegments[1];
+    };
+    const id = getIdFromPath();
+    const device = system.find((item) => item._id === id);
+
     return (
-        <div className="flex flex-wrap justify-center items-center gap-4 bg-gray-100 dark:bg-slate-800 p-4">
-            {data.map((item) => {
+        <div className="flex flex-wrap justify-center items-center gap-4  dark:bg-slate-800 w-full h-full rounded-xl">
+            {device.params.map((item) => {
                 const chartData = {
                     datasets: [
                         {
@@ -42,7 +53,7 @@ const Box2Chart = ({ data }) => {
                 };
 
                 return (
-                    <div key={item.id} className="w-full max-w-xs relative">
+                    <div key={item._id} className="w-full max-w-xs relative">
                         <Doughnut data={chartData} options={options} />
                         <div className="absolute inset-0 flex flex-col justify-center items-center">
                             <span className="text-lg font-semibold text-slate-700 dark:text-white">{item.n}</span>

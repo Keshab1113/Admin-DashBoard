@@ -9,33 +9,26 @@ import Modal from '@mui/material/Modal';
 import Typography from "@mui/material/Typography";
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
-import { fetched } from '../../features/systemSlice';
+import { fetched } from '../../features/userSlice';
 import HomePageCharts from '../../components/HomePageCharts/HomePageCharts';
 
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const [homeData, setHomeData] = useState(null);
+  const systems = useSelector((state) => state.user.systems);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const systems = useSelector((state) => state.system.systems);
+  
  
   useEffect(() => {
       const getHomeData = async () => {
         try {
-          const response = await axios.post("http://localhost:5000/api/home/systems", {}, {
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-          );
-          const data = await response.data.systemData;
-          setHomeData(data);
-          dispatch(fetched(data));
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/home/devices`);
+          const data = await response.data.devices;
+          dispatch(fetched({systems:data}));
           setLoading(true);
         } catch (error) {
           console.log(error);
@@ -52,7 +45,7 @@ const Home = () => {
   
 
   return (
-    <div className=' bg-slate-200 dark:bg-slate-950 w-full h-full justify-center items-center float-end pt-[9vh] pb-20 overflow-y-scroll'>
+    <div className=' bg-slate-100 dark:bg-slate-950 w-full h-full justify-center items-center float-end pt-[12vh] pb-20'>
       <Helmet>
         <meta charSet="utf-8" />
         <title>Home Page |  All Your systems |</title>
@@ -70,7 +63,7 @@ const Home = () => {
             onClose={handleClose}
             aria-describedby="modal-modal-description"
           >
-            <div className=" absolute top-[50%] left-[50%] sm:w-[40%] w-[90%] h-[60%] bg-white dark:bg-slate-900 translate-x-[-50%] translate-y-[-50%] dark:text-white">
+            <div className=" absolute top-[50%] left-[50%] sm:w-[60%] w-[90%] h-max bg-white dark:bg-slate-900 translate-x-[-50%] translate-y-[-50%] dark:text-white">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 <div className="  h-[10vh] flex justify-between items-center px-4">
                   <h1 className="text-2xl font-semibold ">Add New System Details</h1>
@@ -87,8 +80,8 @@ const Home = () => {
           <button onClick={handleOpen} className='flex items-center justify-center w-10 h-10 px-6 text-sm border bg-blue-800 rounded-full sm:hidden'><AddIcon className='  text-white' /></button>
         </div>
       </div>
-      <HomePageBox homeData={homeData || []} loading={loading} />
-      <HomePageCharts homeData={homeData || []} loading={loading} />
+      <HomePageBox loading={loading} />
+      <HomePageCharts loading={loading} />
     </div>
   )
 }

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import Box2Chart from "./Box2Chart"
 import Skeleton from '@mui/material/Skeleton';
 
-const Box2 = ({data}) => {
+const Box2 = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -13,14 +12,17 @@ const Box2 = ({data}) => {
         return () => clearTimeout(timeout);
     }, []);
     return (
-        <div className=' w-fit h-fit bg-white rounded-xl dark:bg-slate-800  '>
+        <div className=' sm:w-[30%] w-[100%] h-full bg-white rounded-xl dark:bg-slate-800 my-4'>
             {loading ? <Skeleton
                 sx={{ bgcolor: 'gray.300', borderRadius: '8px', height: '100%', width: '100%', marginTop: "5px" }}
                 animation="wave"
                 variant="rectangular"
                 height={200}
-            /> :
-                <Box2Chart data={data} />}
+            /> : <>
+                    <div className=' border-b rounded-t-lg px-4 py-2 dark:text-white dark:border-slate-600'> <h1 className=' text-2xl font-extrabold'>Gauge Chart</h1></div>
+                    <Box2Chart />
+                </>
+            }
         </div>
     )
 }

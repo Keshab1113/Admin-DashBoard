@@ -13,7 +13,7 @@ const ProfileBox2 = () => {
         return () => clearTimeout(timeout);
     }, []);
   return (
-      <div className='sm:w-[40%] w-full bg-white rounded-2xl dark:bg-slate-800 text-white mb-[7vh] sm:mb-0 shadow-xl shadow-black'>
+      <div className='sm:w-[50%] w-full bg-white rounded-2xl dark:bg-slate-800 text-white sm:mb-0 shadow-xl shadow-black h-max'>
           {loading ? <Skeleton
               sx={{ bgcolor: 'grey', borderRadius: '8px', height: '100%', width: '100%' }}
               variant="rectangular"
