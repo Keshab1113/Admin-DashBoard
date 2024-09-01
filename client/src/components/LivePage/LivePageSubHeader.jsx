@@ -44,7 +44,7 @@ const LivePageSubHeader = ({data}) => {
         return () => clearTimeout(timeout);
     }, []);
   return (
-      <div className='flex items-center w-full h-12 gap-2 px-2 overflow-y-scroll sm:overflow-hidden hideScrollBar dark:bg-slate-800'>
+      <div className='flex items-center w-full h-12 gap-2 px-2 overflow-y-scroll sm:overflow-hidden hideScrollBar '>
           <div className='flex float-right h-8 gap-2 sm:absolute right-1'>
               <Button onClick={WidgetModal} size="small" variant="contained" startIcon={<AddCircleIcon />}>
                   Widget

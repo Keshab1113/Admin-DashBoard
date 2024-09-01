@@ -6,12 +6,12 @@
 }
 .nav-menu {
   width: 120px;
-  height: 90vh;
   display: flex;
   justify-content: center;
   position: fixed;
-  bottom: 0;
+  height: 100%;
   left: -100%;
+  top: 10vh;
 }
 .nav-menu.active {
   left: 0;

@@ -26,9 +26,9 @@ const ProfileBox2 = () => {
               </div>
               <div className=' flex mt-4 px-4'>
                   <h1 className=' text-2xl font-bold mr-4 text-black dark:text-white'>Subscription Status</h1>
-                  <button className=' bg-green-400 px-4 rounded-md'>Active</button>
+                  <button className=' bg-green-400 px-4 rounded-md h-8'>Active</button>
               </div>
-              <h1 className='pl-4 text-xl font-bold text-black dark:text-white'>Valid till 2024-07-21</h1>
+              <h1 className='pl-4 text-xl font-bold text-black dark:text-white'>Valid till 2025-07-21</h1>
                   <div className=' px-4 mt-4 hideScrollBar'>
                   <h1 className=' text-xl font-bold text-black dark:text-white'> Payment History</h1>
                   <SubscriptionTable />

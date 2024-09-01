@@ -49,7 +49,7 @@ function ResponsiveAppBar() {
                 onClose={handleCloseUserMenu}
             >
 
-                <div className="flex flex-col w-96  justify-center items-center">
+                <div className="flex flex-col w-96 justify-center items-center">
                     <Messages />
                 </div>
 

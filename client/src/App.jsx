@@ -11,7 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import Layout from "./Layout";
 import Home from "./pages/Home/Home.jsx";
-import DeviceSettings from "./pages/Device Setting/DeviceSettings.jsx";
+import DeviceSettings from "./pages/DeviceSetting/DeviceSettings.jsx";
 import UserProfile from "./pages/UserProfile/UserProfile.jsx";
 import Historical from "./pages/Histroical/Historical.jsx";
 import Analytical from "./pages/Analytical/Analytical.jsx";

@@ -14,6 +14,7 @@ import AddAnalogSystem from './AddAnalogSystem';
 import AddDigitalSystem from './AddDigitalSystem';
 
 
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const style = {
@@ -35,12 +36,7 @@ const BottomBox = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const handleOpen = () => setOpen(true);
     const handleAdd = () => {
-        if (selectedOption === "") {
-            alert("Please Select Device");
-        } else {
             setOpenAdd(true);
-        }
-        
     }
     
 

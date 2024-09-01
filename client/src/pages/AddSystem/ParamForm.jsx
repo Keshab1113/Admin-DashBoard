@@ -26,7 +26,7 @@ const ParamForm = ({ param, index, handleParamChange, availableTypes }) => {
                       handleChange(e);
                       handleParamChange(index, { ...param, n: selectedParam, u: unit });
                   }}
-                  className="w-full px-3 py-2 border rounded-lg"
+          className="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 text-black dark:text-white"
               >
                   <option value="">Select a parameter</option>
                   {availableTypes.map((type) => (
@@ -45,7 +45,7 @@ const ParamForm = ({ param, index, handleParamChange, availableTypes }) => {
           id={`u-${index}`}
           value={param.u || ""}
           onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg bg-gray-100"
+          className="w-full px-3 py-2 border rounded-lg bg-gray-100 dark:bg-slate-800 text-black dark:text-white"
           placeholder="Unit"
           disabled
         />
@@ -58,7 +58,7 @@ const ParamForm = ({ param, index, handleParamChange, availableTypes }) => {
           id={`v-${index}`}
           value={param.v || 0}
           onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg"
+          className="w-full px-3 py-2 border rounded-lg dark:bg-slate-800 text-black dark:text-white"
           placeholder="Value"
         />
       </div>
