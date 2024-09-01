@@ -4,6 +4,12 @@
 
 The Admin Dashboard Website provides a comprehensive interface for managing and monitoring your systems. It offers real-time analytics, user management, and customizable settings, allowing administrators to efficiently oversee operations and make informed decisions. The interface is designed with a sleek, intuitive layout to ensure ease of use and is equipped with robust security features.
 
+```sh
+Login with:
+Email: test@gmail.com
+Password: 123456
+ ```
+
 ![Screenshot (331)](https://github.com/Keshab1113/Admin-DashBoard/assets/110785343/c3b9583e-5785-49ea-8234-02b5b211b3e0)
 ![Screenshot (330)](https://github.com/Keshab1113/Admin-DashBoard/assets/110785343/8dc708da-5a26-4660-bdb9-b8de416eb7b3)
 ![Screenshot (329)](https://github.com/Keshab1113/Admin-DashBoard/assets/110785343/e6c38f8e-4f78-4443-bff9-cbfd45d3bc95)
