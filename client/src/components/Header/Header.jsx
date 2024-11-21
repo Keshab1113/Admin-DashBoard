@@ -29,6 +29,7 @@ function Navbar() {
   const [ismenu, setIsmenu] = useState(true);
   const isLivePage = location.pathname.startsWith('/live/');
   const dispatch = useDispatch();
+  const isAdmin = useSelector((state) => state.user.isAdmin);
   
 
   const getIdFromPath = () => {
@@ -123,13 +124,15 @@ function Navbar() {
             <DevicesIcon className="" />
             Dashboard
           </NavLink>
-          <NavLink to={"plant"} className={({ isActive }) =>
-            `sidebaritems duration-200 ${isActive ? "bg-blue-500 text-white " : " text-black"
-            }`
-          }>
-            <SupervisedUserCircleIcon className="" />
-            Plant
-          </NavLink>
+          {isAdmin &&
+            <NavLink to={"users"} className={({ isActive }) =>
+              `sidebaritems duration-200 ${isActive ? "bg-blue-500 text-white " : " text-black"
+              }`
+            }>
+              <SupervisedUserCircleIcon className="" />
+              Users
+            </NavLink>
+          }
           <NavLink to={"profile"} className={({ isActive }) =>
             `sidebaritems duration-200 ${isActive ? "bg-blue-500 text-white " : " text-black"
             }`

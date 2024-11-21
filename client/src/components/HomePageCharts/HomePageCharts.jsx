@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const HomePageCharts = ({ loading }) => {
   const homeData = useSelector((state) => state.user.systems);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const systemStatus = (isOnline) => {
     switch (isOnline) {
@@ -65,13 +66,14 @@ const HomePageCharts = ({ loading }) => {
                     <h1 className=" text-sm text-slate-500">{siteName}</h1>
                   </div>
                   <div className=" text-black dark:text-white  h-[60%] justify-around flex items-start hover:border hover:bg-slate-300 dark:hover:bg-slate-900 rounded-full">
-                    <EditButton
-                      machineName={machineName}
-                      id={_id}
-                      lst={lst}
-                      lat={lat}
-                      lon={lon}
-                    />
+                    {isAdmin &&
+                      <EditButton
+                        machineName={machineName}
+                        id={_id}
+                        lst={lst}
+                        lat={lat}
+                        lon={lon}
+                      />}
                   </div>
                 </div>
               ) : (

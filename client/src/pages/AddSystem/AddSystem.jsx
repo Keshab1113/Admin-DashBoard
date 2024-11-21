@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ParamForm from "./ParamForm";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { useSelector } from "react-redux";
 
 const AddSystem = ({ handleClose }) => {
-  
+
   const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString('en-GB'); // Outputs: 24/08/2024
+  const formattedDate = currentDate.toLocaleDateString('en-GB');
   const formattedTime = currentDate.toLocaleTimeString('en-GB', {
     hour: '2-digit',
     minute: '2-digit',
@@ -14,7 +15,7 @@ const AddSystem = ({ handleClose }) => {
   });
 
   const dateTimeString = `${formattedDate} ${formattedTime}`;
-  
+
   const [formValues, setFormValues] = useState({
     siteName: "",
     machineName: "",
@@ -22,9 +23,10 @@ const AddSystem = ({ handleClose }) => {
     isOnline: "",
     lat: 0,
     lon: 0,
-    params: [{ n: "", u: "", v:0 }],
+    params: [{ n: "", u: "", v: 0 }],
   });
-  
+
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,7 +91,6 @@ const AddSystem = ({ handleClose }) => {
       });
       handleClose();
       toast.success("System added Successfully");
-
     } catch (error) {
       console.error(
         "Error submitting form:",
@@ -97,7 +98,6 @@ const AddSystem = ({ handleClose }) => {
       );
     }
   };
-
 
   return (
     <form
@@ -118,6 +118,7 @@ const AddSystem = ({ handleClose }) => {
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
             placeholder="Enter System Name"
             required
+            disabled={!isAdmin}
           />
         </div>
         <div className="flex justify-between items-center">
@@ -133,6 +134,7 @@ const AddSystem = ({ handleClose }) => {
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
             placeholder="Enter Site Name"
             required
+            disabled={!isAdmin}
           />
         </div>
         <div className="flex justify-between items-center">
@@ -145,6 +147,7 @@ const AddSystem = ({ handleClose }) => {
             value={formValues.isOnline}
             onChange={handleChange}
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+            disabled={!isAdmin}
           >
             <option value="">Select status</option>
             <option value="true">True</option>
@@ -164,6 +167,7 @@ const AddSystem = ({ handleClose }) => {
             onChange={handleChange}
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
             required
+            disabled={!isAdmin}
           />
         </div>
         <div className="flex justify-between items-center">
@@ -179,6 +183,7 @@ const AddSystem = ({ handleClose }) => {
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
             placeholder="Enter Latitude"
             required
+            disabled={!isAdmin}
           />
         </div>
         <div className="flex justify-between items-center">
@@ -194,6 +199,7 @@ const AddSystem = ({ handleClose }) => {
             className="w-1/2 rounded-full px-4 py-2 outline-none border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
             placeholder="Enter Longitude"
             required
+            disabled={!isAdmin}
           />
         </div>
       </div>
@@ -212,26 +218,32 @@ const AddSystem = ({ handleClose }) => {
               param={param}
               handleParamChange={handleParamChange}
               availableTypes={availableTypes}
+              disabled={!isAdmin}
             />
           ))}
         </div>
       </div>
-      <div className="flex justify-end space-x-4 mt-4">
-        <button
-          type="button"
-          onClick={handleAddParam}
-          className=" bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-200"
-        >
-          Add Parameter
-        </button>
-        
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-200"
-        >
-          Add System
-        </button>
-      </div>
+      {isAdmin && (
+        <div className="flex justify-end space-x-4 mt-4">
+          <button
+            type="button"
+            onClick={handleAddParam}
+            className=" bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-200"
+          >
+            Add Parameter
+          </button>
+
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-200"
+          >
+            Add System
+          </button>
+        </div>
+      )}
+      {!isAdmin && (
+        <div className="text-center mt-4 text-red-500">You do not have permission to edit or add systems.</div>
+      )}
     </form>
   );
 };

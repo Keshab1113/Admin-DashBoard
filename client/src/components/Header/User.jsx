@@ -11,6 +11,7 @@ import { logout } from "../../features/userSlice";
 function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const user = useSelector(state => state.user.user);
+    const isAdmin = useSelector((state) => state.user.isAdmin);
     
     const dispatch = useDispatch();
     
@@ -52,7 +53,7 @@ function ResponsiveAppBar() {
                 <div onClick={handleCloseUserMenu} className="flex flex-col w-[150px] justify-center items-center divide-y divide-solid h-full">
                     <div className=" hover:bg-slate-100 w-full flex flex-col pl-6 h-full">
                         <h3 className=" font-bold capitalize"> {user ? user.username : "User"}</h3>
-                        <h6> {user && user.isAdmin == "true" ? "Admin" : "User"}</h6>
+                        <h6> {isAdmin? "Admin" : "User"}</h6>
                     </div>
                     <div className="h-8 flex pl-6 items-center hover:bg-slate-100 w-full">
                         <Link to={"/profile"} className=" font-bold  "><AccountCircleIcon className="mr-2 " />Profile</Link>

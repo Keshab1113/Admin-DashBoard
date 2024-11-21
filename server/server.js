@@ -13,8 +13,8 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,
-    methods: "GET, POST, DELETE, PATCH, HEAD",
+    origin: "*",
+    methods: "GET, POST, DELETE, PATCH, HEAD, PUT",
     credentials: true,
 };
 app.use(cors(corsOptions));

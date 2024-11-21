@@ -11,6 +11,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from "axios";
 
 const style = {
     position: 'absolute',
@@ -40,6 +41,7 @@ const UserProfileBox = () => {
     const user = useSelector(state => state.user);
     const [userDetails, setUserDetails] = useState({
         userData: {
+            userId:'',
             username: '',
             email: '',
             address: '',
@@ -50,6 +52,7 @@ const UserProfileBox = () => {
         if (user) {
             setUserDetails({
                 userData: {
+                    userId:user.user._id  || '',
                     username: user.user.username || '',
                     email: user.user.email || '',
                     address: user.user.address || '',
@@ -68,13 +71,6 @@ const UserProfileBox = () => {
     const profileFinal = profile.length ? profile[profile.length - 1].pview : profilePhoto;
 
 
-    const handleUpdateProfile = () => {
-        toast.success("Profile updated Successfully");
-        setOpen(false);
-        setOpenEmail(false);
-        setOpenCompany(false);
-        setOpenUsername(false);
-    };
     const onClose = () => {
         setPview(null);
     };
@@ -91,8 +87,11 @@ const UserProfileBox = () => {
         setOpenCompany(false);
         setOpenUsername(false);
     }
+    const [loading, setLoading] = useState(true);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setUserDetails((prevUser) => ({
             ...prevUser,
             userData: {
@@ -102,9 +101,27 @@ const UserProfileBox = () => {
         }));
     };
 
-    const [loading, setLoading] = useState(true);
+    const handleUpdateProfile = async () => {
+        try {
+            const userId = userDetails.userData.userId;
 
-    
+            const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/auth/update-me/${userId}`, {
+                username: userDetails.userData.username,
+                address: userDetails.userData.address,
+                projectName: userDetails.userData.projectName,
+            });
+            toast.success("Profile updated Successfully");
+            setOpen(false);
+            setOpenEmail(false);
+            setOpenCompany(false);
+            setOpenUsername(false);
+        } catch (error) {
+            console.error('Error updating user:', error);
+            toast.error("Failed to update profile");
+        }
+    };
+
+
 
 
     return (

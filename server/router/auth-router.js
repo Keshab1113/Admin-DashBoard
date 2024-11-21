@@ -10,5 +10,8 @@ const authMiddleware = require("../middlewares/auth-middleware.js");
 router.post('/login', validate(loginSchema), authcontrollers.login);
 router.post('/signup', validate(signupSchema), authcontrollers.signup);
 router.get('/user', authMiddleware ,authcontrollers.user);
+router.get('/allusers', authcontrollers.getAllUsers);
+router.put('/update-me/:userId', authcontrollers.updateUser);
+
 
 module.exports = router;
