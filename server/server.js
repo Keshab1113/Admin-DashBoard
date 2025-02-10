@@ -7,7 +7,12 @@ const MongoStore = require('connect-mongo');
 const connectDB = require("./utils/db.js");
 const errorMiddleware = require('./middlewares/error-middleware.js');
 const cors = require("cors");
-
+import rateLimit from 'express-rate-limit';
+const loginLimiter = rateLimit({
+    windowMs:15*60*1000,
+    max:100,
+    message:"Too many login attempts from this IP,try again later"
+  })
 const app = express();
 
 app.use(express.json());
@@ -18,8 +23,8 @@ const corsOptions = {
     credentials: true,
 };
 app.use(cors(corsOptions));
-app.use("/api/auth", require("./router/auth-router.js"));
-app.use("/api/home", require("./router/home-router.js"));
+app.use("/api/auth",loginLimiter,require("./router/auth-router.js"));
+app.use("/api/home",loginLimiter,require("./router/home-router.js"));
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000;
