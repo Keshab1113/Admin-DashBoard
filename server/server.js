@@ -8,11 +8,20 @@ const connectDB = require("./utils/db.js");
 const errorMiddleware = require('./middlewares/error-middleware.js');
 const cors = require("cors");
 import rateLimit from 'express-rate-limit';
+
 const loginLimiter = rateLimit({
-    windowMs:15*60*1000,
-    max:100,
-    message:"Too many login attempts from this IP,try again later"
-  })
+    windowMs: 15 * 60 * 1000, 
+    max: process.env.NODE_ENV === 'production' ? 50 : 100, 
+    message: "Too many login attempts from this IP, try again later",
+    standardHeaders: true,
+    legacyHeaders: false, 
+    handler: (req, res) => {
+        res.status(429).json({
+            success: false,
+            error: "Too many login attempts. Please wait before retrying."
+        });
+    }
+});
 const app = express();
 
 app.use(express.json());
