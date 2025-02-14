@@ -18,6 +18,7 @@ import NoPage from "./pages/NoPage.jsx";
 import Login from "./pages/Login/Login.jsx";
 import SubscriptionExpired from "./pages/SubscriptionPage/SubscriptionExpired.jsx";
 import Signup from "./pages/SignUp/Signup.jsx";
+import Contact from "./components/Contact/contact.jsx";
 
 const PrivateRoute = ({ children }) => {
   const isLogedin = useSelector((state) => state.user.isLogedin);
@@ -33,38 +34,87 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Layout />
+            </PrivateRoute>
+          }
+        >
           <Route
             path="/"
-            element={<PrivateRoute><Home /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/live/*"
-            element={<PrivateRoute><LivePage /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <LivePage />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/dashboard"
-            element={<PrivateRoute><DeviceSettings /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <DeviceSettings />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/profile"
-            element={<PrivateRoute><UserProfile /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/users"
-            element={<PrivateRoute><AdminRoute><AllUsers /></AdminRoute></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <AdminRoute>
+                  <AllUsers />
+                </AdminRoute>
+              </PrivateRoute>
+            }
           />
           <Route
             path="/subscription"
-            element={<PrivateRoute><SubscriptionExpired /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <SubscriptionExpired />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/live/:id/historical"
-            element={<PrivateRoute><Historical /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <Historical />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/live/:id/analytical"
-            element={<PrivateRoute><Analytical /></PrivateRoute>}
+            element={
+              <PrivateRoute>
+                <Analytical />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PrivateRoute>
+                <Contact />
+              </PrivateRoute>
+            }
           />
         </Route>
         <Route path="/login" element={<Login />} />
