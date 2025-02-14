@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express-rate-limit": "^7.5.0",
+    "install": "^0.13.0",
+    "npm": "^11.1.0"
+  }
+}
