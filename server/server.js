@@ -7,7 +7,7 @@ const MongoStore = require("connect-mongo");
 const connectDB = require("./utils/db.js");
 const errorMiddleware = require("./middlewares/error-middleware.js");
 const cors = require("cors");
-import rateLimit from "express-rate-limit";
+const rateLimit = require("express-rate-limit");
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
