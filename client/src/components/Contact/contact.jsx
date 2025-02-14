@@ -33,14 +33,14 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-slate-900 text-white py-16 px-4 sm:px-8">
+    <section className="bg-white text-black py-16 px-4 sm:px-8">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-100">
         Contact Me
       </h2>
       <form
         ref={form}
         onSubmit={handleSubmit}
-        className="max-w-2xl mx-auto bg-slate-700 p-8 rounded-lg shadow-lg"
+        className="max-w-2xl mx-auto bg-white border border-black border-spacing-2 p-8 rounded-lg shadow-lg"
       >
         <div className="space-y-4">
           <input
@@ -48,7 +48,7 @@ const Contact = () => {
             name="name"
             placeholder="Your Name"
             ref={userName}
-            className="w-full p-3 bg-slate-600 border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-slate-100 border border-gray-500 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -56,14 +56,14 @@ const Contact = () => {
             name="email"
             placeholder="Your Email"
             ref={emailAddress}
-            className="w-full p-3 bg-slate-600 border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-slate-100 border border-gray-500 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <textarea
             name="message"
             placeholder="Your Message"
             ref={messageRef}
-            className="w-full p-3 bg-slate-600 border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-slate-100 border border-gray-500 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={4}
             required
           ></textarea>
@@ -71,7 +71,7 @@ const Contact = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full mt-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full mt-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-slate-500  focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           {loading ? "Sending..." : "Send Message"}
         </button>

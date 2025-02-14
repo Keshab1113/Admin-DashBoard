@@ -25,6 +25,11 @@ const Footer = () => {
               </a>
             </li>
             <li className="mb-2">
+              <a href="/contact" className="text-gray-400 hover:text-white">
+                Contact Us
+              </a>
+            </li>
+            <li className="mb-2">
               <a href="#" className="text-gray-400 hover:text-white">
                 Help Center
               </a>
@@ -97,9 +102,6 @@ const Footer = () => {
             &copy; Copyright 2024 XYZ Company Design, Inc. All rights reserved
           </p>
         </div>
-      </div>
-      <div className="flex justify-center mt-4">
-        <Contact />
       </div>
     </footer>
   );
