@@ -33,8 +33,8 @@ const HomePageBox = ({ loading }) => {
 
   return (
     <>
-      <div className="h-[21vh] overflow-auto grid grid-flow-col items-center gap-2 sm:grid-cols-4 hideScrollBar px-6">
-        {loading ? <div className=" bg-[#d4d5f4] dark:bg-slate-900 w-[90vw] sm:w-full h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
+      <div className="h-[21vh] overflow-auto grid grid-flow-col items-center gap-6 hideScrollBar px-6 ">
+        {loading ? <div className=" bg-[#d4d5f4] dark:bg-slate-900 w-[90vw] md:w-[50vw] lg:w-full h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
             <button className=" bg-blue-700 rounded-3xl px-4 py-[4px] text-white text-xs">
               Manage
             </button>
@@ -54,7 +54,8 @@ const HomePageBox = ({ loading }) => {
           animation="wave"
           height={100}
         />}
-        {loading ? <div className=" bg-[#d3f8d3] dark:bg-slate-900 sm:w-full w-[90vw] h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
+        {loading ? 
+        <div className=" bg-[#d3f8d3] dark:bg-slate-900 sm:w-full w-[90vw] md:w-[50vw] lg:w-full h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
           <button className=" bg-[#17a817] rounded-3xl px-4 py-[4px] text-white text-xs">
               Manage
             </button>
@@ -73,7 +74,8 @@ const HomePageBox = ({ loading }) => {
           animation="wave"
           height={100}
         /> }
-        {loading ? <div className=" bg-[#f2ddd6] dark:bg-slate-900 w-[90vw] sm:w-full  h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
+        {loading ? 
+        <div className=" bg-[#f2ddd6] dark:bg-slate-900 w-[90vw] md:w-[50vw] lg:w-full sm:w-full  h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
             <button className=" bg-red-600 rounded-3xl px-4 py-[4px] text-white text-xs">
               Manage
             </button>
@@ -93,7 +95,7 @@ const HomePageBox = ({ loading }) => {
           height={100}
         />}
         {
-          loading ? <div className=" bg-[#e9f3bf] dark:bg-slate-900 w-[90vw] sm:w-full  h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
+          loading ? <div className=" bg-[#e9f3bf] dark:bg-slate-900 w-[90vw] md:w-[50vw] lg:w-full sm:w-full  h-[13.5vh] rounded-xl pr-4 pt-2 flex-row-reverse flex justify-between items-center shadow-lg shadow-black">
             <button className=" bg-yellow-500 rounded-3xl px-4 py-[4px] text-white text-xs">
                 Manage
               </button>

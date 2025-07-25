@@ -52,13 +52,13 @@ const Login = () => {
             );
             const res_data = await response.json();
             if (response.ok) {
-                dispatch(login({ user: res_data.userDetails, token: res_data.token, isLogedin:true }));
-                    setUser({
-                        email: "",
-                        password: "",
-                    });
+                dispatch(login({ user: res_data.userDetails, token: res_data.token, isLogedin: true }));
+                setUser({
+                    email: "",
+                    password: "",
+                });
                 navigate("/");
-                } else {
+            } else {
                 setErrMsg(res_data.extraDetails ? res_data.extraDetails : res_data.message)
             }
         } catch (error) {
@@ -68,19 +68,19 @@ const Login = () => {
         }
     }
 
-    
+
 
     return (
         <div className=' h-[100vh] flex justify-start bg-white dark:bg-slate-950'>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Login Page | </title>
+                <title>Login Page | Admin Dashboard</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
-            <form onSubmit={handleSubmit} className=' border h-full sm:w-[25%] w-[100%] flex flex-col justify-center items-center shadow bg-slate-100 dark:bg-slate-900 dark:border-slate-950'>
-                <h1 className='mb-5 text-3xl font-bold text-center text-blue-700 dark:text-white'>Log in to your account</h1>
-                <div className=' w-[90%] mb-6'>
-                    <h1 className='mb-4 text-lg font-bold dark:text-white'>Enter Email Address</h1>
+            <form onSubmit={handleSubmit} className=' border h-full md:px-10 px-4 lg:w-[30%] w-[100%] flex flex-col justify-center items-start shadow bg-white dark:bg-slate-900 dark:border-slate-950'>
+                <h1 className='mb-5 lg:mb-20 text-3xl lg:text-4xl font-bold text-center text-black dark:text-white'>Log in to your account</h1>
+                <div className=' w-full mb-6'>
+                    <h1 className='mb-2 text-lg font-bold dark:text-white'>Enter Email Address</h1>
                     <input
                         type="email"
                         id="email"
@@ -88,18 +88,17 @@ const Login = () => {
                         value={user.email}
                         onChange={handleInput}
                         placeholder="Enter your email"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:ring-black"
                         required
                     />
-                    
                 </div>
-                <div className=' w-[90%] '>
-                    <h1 className='mb-4 text-lg font-bold dark:text-white'>Enter Your Password</h1>
+                <div className=' w-full '>
+                    <h1 className='mb-2 text-lg font-bold dark:text-white'>Enter Your Password</h1>
                     <div className="relative w-full">
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
-                            className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:ring-black"
                             value={user.password}
                             onChange={handleInput}
                             name='password'
@@ -116,24 +115,25 @@ const Login = () => {
                             )}
                         </button>
                     </div>
+                    <div className=' w-full mt-1 mb-2'>
+                        <h1 className=' font-semibold text-blue-700 cursor-pointer dark:text-white hover:dark:text-slate-500 w-max'>Forgot Password?</h1>
+                    </div>
                 </div>
-                <div className=' w-[90%] mt-4'>
-                    <h1 className='mb-4 font-semibold text-red-700 cursor-pointer dark:text-red hover:dark:text-slate-500 w-max'>{errMsg}</h1>
+                <div className={`w-full ${!errMsg && "hidden"}`}>
+                    <h1 className=' font-semibold text-red-700 cursor-pointer dark:text-red hover:dark:text-slate-500 w-max'>{errMsg}</h1>
                 </div>
-                <div className=' w-[90%] mt-4'>
-                    <h1 className='mb-4 font-semibold text-blue-700 cursor-pointer dark:text-white hover:dark:text-slate-500 w-max'>Forgot Password?</h1>
-                </div>
+
                 {
-                    loading ? <Button variant="outlined" sx={{ 'BackgroundColor': 'white' }} disabled>Login...<Spinner /></Button> :
-                        <Button variant="outlined" type='submit' sx={{ 'BackgroundColor': 'white' }}>Login</Button>
+                    loading ? <Button variant="outlined" sx={{ 'BackgroundColor': 'white', 'width':'100%', 'marginTop':'16px' }} disabled>Login...<Spinner /></Button> :
+                        <Button variant="outlined" type='submit' sx={{ 'BackgroundColor': 'white', 'width':'100%', 'marginTop':'16px'  }}>Login</Button>
                 }
-                <div className='w-[90%] mt-4'>
+                <div className='w-full mt-2'>
                     <Link to={'/signup'} className='font-semibold hover:text-blue-700 dark:text-white hover:dark:text-slate-500'>
                         <button>Create a new account?</button>
                     </Link>
                 </div>
             </form>
-            <Banner/>
+            <Banner />
         </div>
     )
 }

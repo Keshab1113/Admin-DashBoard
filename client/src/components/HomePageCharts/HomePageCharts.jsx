@@ -35,7 +35,7 @@ const HomePageCharts = ({ loading }) => {
 
   const navigate = useNavigate();
   return (
-    <div className="grid w-full h-max grid-cols-1 gap-4 mt-4 sm:grid-cols-4 px-6">
+    <div className="grid w-full h-max grid-cols-1 gap-7 mt-4 lg:grid-cols-4 md:grid-cols-2 px-6">
       {homeData &&
         homeData.map((curElem) => {
           const {
@@ -98,7 +98,7 @@ const HomePageCharts = ({ loading }) => {
                       key={`${_id}`}
                     >
                       <h1 className="font-bold ">{n}</h1>
-                      <div className="flex w-24 justify-between">
+                      <div className="flex w-24 gap-2">
                         <h1 className=" font-bold">
                           {Math.floor(Math.random() * 10 + 15)}
                         </h1>

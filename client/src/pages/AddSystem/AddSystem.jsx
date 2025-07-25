@@ -102,9 +102,9 @@ const AddSystem = ({ handleClose }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 rounded-md bg-white dark:bg-gray-800 shadow-md space-y-4"
+      className="p-6 rounded-md bg-white dark:bg-gray-800 shadow-md space-y-4"
     >
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
         <div className="flex justify-between items-center">
           <label htmlFor="machineName" className="font-semibold">
             System Name:

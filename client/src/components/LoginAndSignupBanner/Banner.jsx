@@ -17,8 +17,8 @@ const Banner = () => {
     };
 
   return (
-      <div className=' w-[75%] bg-slate-200 sm:flex hidden overflow-hidden justify-center items-center'>
-          <Slider {...settings} className=' w-full h-full mx-10'>
+      <div className=' lg:w-[75%] w-[50%] bg-slate-200 lg:flex hidden overflow-hidden justify-center items-center'>
+          <Slider {...settings} className=' w-full h-full lg:mx-10 mx-6'>
               <div className='relative w-full h-full'>
                   <div className='absolute flex justify-around items-start flex-col w-[50%] h-[50%] px-6 py-4 glass left-[25%] top-[25%]'>
                       <h1 className=' text-white text-3xl font-bold capitalize '>Admin Dashboard</h1>

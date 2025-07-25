@@ -63,9 +63,9 @@ const Home = () => {
             onClose={handleClose}
             aria-describedby="modal-modal-description"
           >
-            <div className=" absolute top-[50%] left-[50%] sm:w-[60%] w-[90%] h-max bg-white dark:bg-slate-900 translate-x-[-50%] translate-y-[-50%] dark:text-white">
+            <div className=" rounded-md absolute top-[50%] left-[50%] sm:w-[60%] w-[90%] h-max bg-white dark:bg-slate-900 translate-x-[-50%] translate-y-[-50%] dark:text-white">
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                <div className="  h-[10vh] flex justify-between items-center px-4">
+                <div className="  lg:h-[10vh] h-full flex justify-between items-center md:px-6 px-4 py-4">
                   <h1 className="text-2xl font-semibold ">Add New System Details</h1>
                   <button onClick={handleClose}>
                     <CloseIcon />
