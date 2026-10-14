@@ -1,4 +1,4 @@
-# Admin Dashboard Website
+# Admin Dashboard
 
 ## Overview
 
